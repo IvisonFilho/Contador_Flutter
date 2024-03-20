@@ -30,6 +30,7 @@ dependencies:
   cupertino_icons: ^1.0.0
 
 dev_dependencies:
+  flutter_lints: ^3.0.1
   flutter_test:
     sdk: flutter
 
@@ -47,6 +48,10 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
      - Imagens/restaurante.jpg
+     - Imagens/Agua.jpeg
+     - Imagens/gota.png
+     - Imagens/Copo_Inicio.jpeg
+     - Imagens/Copo_Fim.jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

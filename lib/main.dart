@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(
-      MaterialApp(title: "Contador de pessoas", home: Home())); //Material App
+  runApp(MaterialApp(
+    title: "Contador de copos de água",
+    home: Home(),
+  ));
 }
 
 class Home extends StatefulWidget {
@@ -11,39 +13,49 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int _pessoa = 0;
-  String _mensagem = "Pode entrar!";
+  int _copo = 0;
+  String _mensagem = "Atinja sua meta!";
 
   void _changePeople(int delta) {
     setState(() {
-      _pessoa += delta;
-      if (_pessoa >= 20) {
-        _mensagem = "Lotado, não pode entrar.";
-        _pessoa = 20;
-      } else if (_pessoa < 20 && _pessoa >= 0) {
-        _mensagem = "Pode entrar!";
+      _copo += delta;
+      if (_copo >= 8) {
+        _mensagem = "Parabéns, você conseguiu. Volte Amanhã!";
+        _copo = 8;
+      } else if (_copo < 8 && _copo >= 0) {
+        _mensagem = "Atinja sua meta!";
       } else {
-        _pessoa = 0;
+        _copo = 0;
       }
     });
   }
 
+  void _resetCounter() {
+    setState(() {
+      _copo = 0;
+      _mensagem = "Atinja sua meta!";
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
         Image.asset(
-          "Imagens/restaurante.jpg",
+          _copo >= 8 ? "Imagens/Copo_Fim.jpg" : "Imagens/Copo_Inicio.jpeg",
           fit: BoxFit.cover,
-          height: 1000.0,
+          height: 1000.00,
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              "Pessoas: $_pessoa",
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-            ), //text
+              "Copos: $_copo",
+              style: TextStyle(
+                color: Color.fromARGB(255, 71, 69, 69),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -52,7 +64,10 @@ class _HomeState extends State<Home> {
                   child: ElevatedButton(
                     child: Text(
                       "+1",
-                      style: TextStyle(fontSize: 40.0, color: Colors.white),
+                      style: TextStyle(
+                        fontSize: 40.0,
+                        color: const Color.fromARGB(255, 68, 67, 67),
+                      ),
                     ),
                     onPressed: () {
                       _changePeople(1);
@@ -64,7 +79,10 @@ class _HomeState extends State<Home> {
                   child: ElevatedButton(
                     child: Text(
                       "-1",
-                      style: TextStyle(fontSize: 40.0, color: Colors.white),
+                      style: TextStyle(
+                        fontSize: 40.0,
+                        color: const Color.fromARGB(255, 68, 67, 67),
+                      ),
                     ),
                     onPressed: () {
                       _changePeople(-1);
@@ -73,15 +91,36 @@ class _HomeState extends State<Home> {
                 ),
               ],
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: ElevatedButton(
+                    child: Text(
+                      "Reiniciar",
+                      style: TextStyle(
+                        fontSize: 40.0,
+                        color: const Color.fromARGB(255, 68, 67, 67),
+                      ),
+                    ),
+                    onPressed: () {
+                      _resetCounter();
+                    },
+                  ),
+                ),
+              ],
+            ),
             Text(
               _mensagem,
               style: TextStyle(
-                  color: Colors.white,
-                  fontStyle: FontStyle.italic,
-                  fontSize: 30),
-            ) //text
-          ], //widget
-        ) //Column
+                color: const Color.fromARGB(255, 68, 67, 67),
+                fontStyle: FontStyle.italic,
+                fontSize: 30,
+              ),
+            ),
+          ],
+        ),
       ],
     );
   }
